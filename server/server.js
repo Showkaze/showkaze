@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const path = require('path');
-const controller = require('./controllers/testController.js')
+const controller = require('./controllers/testcontroller.js')
 
 const app = express()
 
@@ -10,7 +10,7 @@ const PORT = 3000;
 app.use('/client', express.static((path.join(__dirname, '../client'))));
 
 
-// rounte test
+
 app.get('/type=concert/:venue.state', controller.getByState, (req, res) => {
   res.status(200).json(res.locals.byState);
 })
