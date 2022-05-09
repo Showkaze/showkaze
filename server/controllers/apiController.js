@@ -6,19 +6,21 @@ const APIId = 'MTQ3MDIyNzV8MTY1MTk0ODU1My40MDk3MTE';
 apiController.getByState = (req, res, next) => {
   const { state } = req.params;
   res.locals.concertsByState = [];
-  fetch(`https://api.seatgeek.com/2/events?type=concert&venue.state=${state}&client_id=${APIId}&client_secret=${APIKey}`) // defalut 10 per page, page 1
+  fetch(`https://api.seatgeek.com/2/events?type=concert&venue.state=${state}&per_page=8&client_id=${APIId}&client_secret=${APIKey}`) // defalut 10 per page, page 1
     .then(data => data.json())
     .then(data => {
       const events = data.events;
-      console.log(events);
       for (let i = 0; i < events.length; i++) { 
         const concert = {};
         concert.imageURL = events[i].url;
-        concert.artist = events[i].performers.map(el => el.name);
-        concert.date = events.datetime_utc; // date format not decided yet
-        concert.city = events.venue.city;
+        concert.artist = events[i].performers.map(el => el.name).join(', ');
+        concert.city = events[i].venue.city;
+        concert.date = events[i].datetime_utc; // date format not decided yet
+        // // var utcDate = events[i].datetime_utc; // date format not decided yet
+        // var localDate = new Date(events[i].datetime_utc)
         res.locals.concertsByState.push(concert);
       }
+      console.log(res.locals.concertsByState);
       return next();
     })
     .catch(err => next({
