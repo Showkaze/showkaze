@@ -21,7 +21,7 @@ class CardsSection extends Component{
   constructor(props) {
     super(props);
 
-    this.state = this.props;
+    this.state = this.props.events;
   };
 
   render() {
@@ -34,10 +34,17 @@ class CardsSection extends Component{
       //   cardItem2.push(<Col><CardItem key={j} ></CardItem></Col>)
       // }
       let cards = []
+      const x = this.state
       for(let i = 0; i < 2; i++){
         const col = [];
         for(let j = 0; j < 4; j++){
-          col.push(<CardItem key={j} title={this.state.events[j].title}/>);
+          let index = i * 4 + j
+          col.push(<CardItem key={j} 
+            imageURL={x[index].imageURL}
+            artist={x[index].artist}
+            date={x[index].state}
+            city={x[index].city}
+            />);
         }
         cards.push(<Col>{col}</Col>);
       }
@@ -46,9 +53,11 @@ class CardsSection extends Component{
       <Container className='d-flex justify-content-center text-center px-0 pt-4'>
         <Row className=' d-flex justify-content-center text-center'>
           {cards[0]}
+          {/* {cards[1]} */}
         </Row>
         <Row className=' d-flex justify-content-center text-center'>
           {cards[1]}
+          {/* {cards[3]} */}
         </Row>
       </Container>
     );

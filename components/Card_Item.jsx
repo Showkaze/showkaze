@@ -14,18 +14,19 @@ class CardItem extends Component {
   // create loop to add city location
   // create loop to add price
 render() { 
-
+  console.log(this.props.imageURL);
   return (
     <Card style={{ width: '18rem' }} className='my-3 mx-0 px-0'> 
       <Card.Img
         variant='top'
-        src='https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg'
+        src={this.props.imageURL}
         style={{height: '8rem'}}
       />
       <Card.Body>
-        <Card.Title>Artist Name</Card.Title>
+        <Card.Title>{this.props.artist}</Card.Title>
         <Card.Text>
-           Location:{this.props.title}
+           City:{this.props.city}
+           Date:{this.props.date}
            {/* <p className='cards-text'>Tickets: </p> */}
            {/* <p className='cards-text'>Date: </p> */}
         </Card.Text>
