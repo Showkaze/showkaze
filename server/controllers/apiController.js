@@ -9,7 +9,6 @@ apiController.getByState = (req, res, next) => {
   fetch(`https://api.seatgeek.com/2/events?type=concert&venue.state=${state}&client_id=${APIId}&client_secret=${APIKey}`) // defalut 10 per page, page 1
     .then(data => data.json())
     .then(data => {
-      
       const events = data.events;
       console.log(events);
       for (let i = 0; i < events.length; i++) { 
