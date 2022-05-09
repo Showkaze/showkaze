@@ -3,8 +3,12 @@ const apiController = {};
 const APIKey = '122ef349d3fbf2f6d3527b76bd45451e7b042fcb0945204ae882878d7f1ce31c';
 const APIId = 'MTQ3MDIyNzV8MTY1MTk0ODU1My40MDk3MTE';
 
+<<<<<<< HEAD
 let currentState = 'CA';
 let currentPage = 1;
+=======
+const stateCodes = require('./stateCodes');
+>>>>>>> dev
 
 apiController.getByState = (req, res, next) => {
   const { state } = req.params;
@@ -38,6 +42,7 @@ apiController.getByState = (req, res, next) => {
     }))
 }
 
+<<<<<<< HEAD
 apiController.getNext = (req, res, next) => {
   const { state } = req.params;
   if (state !== currentState) {
@@ -74,6 +79,19 @@ apiController.getPrevious = (req, res, next) => {
 }
 
 
+=======
+/*
+This function takes the params.state property on the request and transforms it from an
+all lowercase name to a two-letter uppercase code for the state
+*/
+apiController.convertState = function(req, res, next){
+  const capState = req.params.state.charAt(0).toUpperCase() + req.params.state.slice(1);
+  const newState = stateCodes[capState]
+  req.params.state = newState;
+  return next();
+}
+
+>>>>>>> dev
 
 
 

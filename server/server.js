@@ -12,7 +12,12 @@ app.use(express.json());
 app.use('/client', express.static((path.join(__dirname, '../client'))));
 
 
+<<<<<<< HEAD
 app.get('/location/:state', apiController.getByState, (req, res) => {
+=======
+app.get('/location/:state', apiController.convertState, apiController.getByState, (req, res) => {
+  console.log('byState invoked');
+>>>>>>> dev
   res.status(200).json(res.locals.concertsByState);
 })
 
