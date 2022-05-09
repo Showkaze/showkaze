@@ -6,12 +6,12 @@ import Carousel from './Carousel'
 import CarouselSection from './Carousel'
 import styles from '../client/index.css'
 
-export default function App() {
+export default function App(props) {
   return (
     <div className='bg-dark'>
         <NavigationBar />
          <CarouselSection  />
-          <CardsSection />
+          <CardsSection events={props.events}/>
         <Footer />
     </div>
   )
