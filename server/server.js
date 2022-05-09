@@ -1,23 +1,20 @@
 require('dotenv').config()
-const express = require('express')
+const express = require('express');
 const path = require('path');
-const controller = require('./controllers/testcontroller.js')
+const apiController = require('./controllers/apiController.js');
 
 const app = express()
 
 const PORT = 3000;
 
+app.use(express.json());
+
 app.use('/client', express.static((path.join(__dirname, '../client'))));
 
-//set up a route for get requests 
-//endpoint would be the location input by user
-//if a certain location is called
-app.get('/location/:state', testController.testRouteParams, (req, res) => {
-res.status(200).sendFile((path.join(__dirname, 'sal.html')));
 
-
-app.get('/type=concert/:venue.state', controller.getByState, (req, res) => {
-  res.status(200).json(res.locals.byState);
+app.get('/location/:state', apiController.getByState, (req, res) => {
+  console.log('byState invoked');
+  res.status(200).json(res.locals);
 })
 
 
