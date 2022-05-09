@@ -36,9 +36,10 @@ This function takes the params.state property on the request and transforms it f
 all lowercase name to a two-letter uppercase code for the state
 */
 apiController.convertState = function(req, res, next){
-  const newState = stateCodes[req.params.state.toLowerCase()]
-  console.log("NEWSTATE: ", newState);
-  return next()
+  const capState = req.params.state.charAt(0).toUpperCase() + req.params.state.slice(1);
+  const newState = stateCodes[capState]
+  req.params.state = newState;
+  return next();
 }
 
 
