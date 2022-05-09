@@ -1,0 +1,27 @@
+img {
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+
+  /* Safari seems to support, but seems deprecated and does the same thing as the others. */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.cards-text,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.custom-carousel-item {
+  height: 550px;
+}
+
+.custom-carousel-img {
+  min-height: 500px;
+}
+
+.carousel-dark .carousel-control-next-icon,
+.carousel-dark .carousel-control-prev-icon {
+  visibility: hidden;
+}

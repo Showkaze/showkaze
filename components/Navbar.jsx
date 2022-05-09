@@ -5,7 +5,7 @@ export default class NavigationBar extends Component {
   render() {
     return (
         <Navbar bg='dark' variant='dark' collapseOnSelect expand='lg'>
-        <Container fluid>
+        <Container fluid className='mx-4'>
         <Navbar.Brand href="App">ShowKaze</Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
@@ -17,7 +17,7 @@ export default class NavigationBar extends Component {
         <Form className="d-flex">
         <FormControl
           type="search"
-          placeholder="Search"
+          placeholder="Enter state"
           className="me-2"
           aria-label="Search"
         />
