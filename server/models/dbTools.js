@@ -10,13 +10,13 @@ const pool = new pg.Pool({
 });
 
 const resetQuery = fs.readFileSync(path.join(__dirname, 'showkazeDB.sql'), 'utf8');
-//const addQuery = fs.readFileSync(path.join(__dirname, 'sample.sql'), 'utf8');
+const addQuery = fs.readFileSync(path.join(__dirname, 'sample.sql'), 'utf8');
 
 const dbTools = {}
 
 dbTools.pool = pool;
 dbTools.reset = () => pool.query(resetQuery);
-dbTools.add = () => pool.query(addQuery);
+dbTools.add = () => pool.query(addQuery).catch(err => console.log(err));
 dbTools.view = () => pool.query('SELECT * FROM tasks').then(response => console.log(response.rows));
 
 /*
