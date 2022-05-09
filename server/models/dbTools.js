@@ -1,6 +1,7 @@
 const pg = require('pg');
 const fs = require('fs');
 const path = require('path');
+const { Console } = require('console');
 // db url
 const POSTGRES_URI = 'postgres://gvwrgjhp:MqxNWDDg7xIMWzZB1tTfxpqGhpX-C0rH@heffalump.db.elephantsql.com/gvwrgjhp'
 
@@ -15,7 +16,10 @@ const addQuery = fs.readFileSync(path.join(__dirname, 'sample.sql'), 'utf8');
 const dbTools = {}
 
 dbTools.pool = pool;
-dbTools.reset = () => pool.query(resetQuery);
+dbTools.reset = () => {
+  console.log('Resetting the db with this query: \n', resetQuery)
+  pool.query(resetQuery);
+}
 dbTools.add = () => pool.query(addQuery).catch(err => console.log(err));
 dbTools.view = () => pool.query('SELECT * FROM tasks').then(response => console.log(response.rows));
 
@@ -30,9 +34,11 @@ dbTools.createEventAddQueryParams = function(eventArray){
     queryArray.push(e.id, e.imageURL, e.artist, e.date, e.city);
   }
   for(let i = 0; i < eventArray.length; i++){
-    queryString = queryString.concat(`($${5 * i + 1}, $${5 * i + 2}), $${5 * i + 3}, $${5 * i + 4}, $${5 * i + 5}`);
+    queryString = queryString.concat(`($${5 * i + 1}, $${5 * i + 2}, $${5 * i + 3}, $${5 * i + 4}, $${5 * i + 5})`);
     if(i < eventArray.length - 1) queryString = queryString.concat(',');
   }
+  console.log('QUERY STRING: ', queryString);
+  console.log('QUERY ARRAY: ', queryArray);
   return [queryString, queryArray];
 }
 

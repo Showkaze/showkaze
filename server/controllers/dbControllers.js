@@ -8,14 +8,17 @@ This middleware takes an array of objects that represent different events (store
 and inserts that information into the database.
 */
 dbControllers.addEvents = function(req, res, next){
-  const [queryString, queryArray] = dbTools.createEventAddQueryParams(req.body.events)
+  //console.log('REQ.BODY ', req.body);
+  const [queryString, queryArray] = dbTools.createEventAddQueryParams(req.body);
   dbTools.pool.query(queryString, queryArray)
-    .then(() =>
-      next()
-    ).catch(err => next({
-      log: `Error occured at dbControllers.addEvents, ERROR: ${err}`,
-      message: "Error occured when adding the events to the database"
-    }));
+    .then((response) => {
+      next();
+    }).catch(err => { 
+      next({
+        log: `Error occured at dbControllers.addEvents, ERROR: ${err}`,
+        message: "Error occured when adding the events to the database"
+      });
+    });
 }
 
 /*
@@ -24,10 +27,12 @@ It will convert the '_date' property into 'date' for consistency
 */
 dbControllers.getAllEvents = function(req, res, next){
   dbTools.pool.query('SELECT * FROM events')
-    .then(response =>
-      response.rows
-    ).then(rows => {
+    .then(response =>{
+      //console.log('UNCONVERTED RESPONSE: ', response.rows);
+      return response.rows;
+    }).then(rows => {
       res.locals.events = dbTools.queryReturnSanitizer(rows);
+      //console.log('CONVERTED RESPONSE: ',res.locals.events);
       next();
     }).catch(err => next({
       log: `Error occured at dbControllers.addEvents, ERROR: ${err}`,
