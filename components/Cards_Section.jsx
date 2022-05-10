@@ -20,19 +20,23 @@ import CardItem from './Card_Item';
 class CardsSection extends Component{
   constructor(props) {
     super(props);
-
     this.state = this.props.events;
+    this.handleSearch = this.handleSearch.bind(this);
   };
+
+  handleSearch(state){
+    fetch(`/location/${state}`)
+    .then(response => 
+      response.json)
+    .then(data => {
+      this.setState( (previousState) => {
+        this.state = data;
+      })
+    })
+  }
 
   render() {
     console.log("THIS IS STATE: ", this.state);
-    // const cardItem = []
-    // const cardItem2 = []
-      // for (let i = 0, j = 4; i < 4; i++, j++) {
-      //   console.log('this.state', this.state.events)
-      //   cardItem.push(<Col><CardItem key={i} ></CardItem></Col>)
-      //   cardItem2.push(<Col><CardItem key={j} ></CardItem></Col>)
-      // }
       let cards = []
       const x = this.state
       for(let i = 0; i < 4; i++){
@@ -42,17 +46,18 @@ class CardsSection extends Component{
           col.push(<CardItem key={j} 
             imageURL={x[index].imageURL}
             artist={x[index].artist}
-            date={x[index].state}
+            date={x[index].date}
             city={x[index].city}
             />);
         }
-        cards.push(<Col>{col}</Col>);
+        cards.push(<Col className='px-4'>{col}</Col>);
       }
     
     return (
       <Container className='d-flex justify-content-center text-center px-0 pt-4'>
         <Row className=' d-flex justify-content-center text-center'>
           {cards[0]}
+         
           {cards[1]}
         </Row>
         <Row className=' d-flex justify-content-center text-center'>
