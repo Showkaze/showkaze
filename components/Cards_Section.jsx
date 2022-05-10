@@ -35,10 +35,10 @@ class CardsSection extends Component{
       // }
       let cards = []
       const x = this.state
-      for(let i = 0; i < 2; i++){
+      for(let i = 0; i < 4; i++){
         const col = [];
-        for(let j = 0; j < 4; j++){
-          let index = i * 4 + j
+        for(let j = 0; j < 2; j++){
+          let index = i * 2 + j
           col.push(<CardItem key={j} 
             imageURL={x[index].imageURL}
             artist={x[index].artist}
@@ -53,11 +53,11 @@ class CardsSection extends Component{
       <Container className='d-flex justify-content-center text-center px-0 pt-4'>
         <Row className=' d-flex justify-content-center text-center'>
           {cards[0]}
-          {/* {cards[1]} */}
+          {cards[1]}
         </Row>
         <Row className=' d-flex justify-content-center text-center'>
-          {cards[1]}
-          {/* {cards[3]} */}
+          {cards[2]}
+          {cards[3]}
         </Row>
       </Container>
     );

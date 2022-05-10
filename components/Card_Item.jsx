@@ -25,8 +25,8 @@ render() {
       <Card.Body>
         <Card.Title>{this.props.artist}</Card.Title>
         <Card.Text>
-           City:{this.props.city}
-           Date:{this.props.date}
+           City: {this.props.city} <br></br>
+           Date: {this.props.date}
            {/* <p className='cards-text'>Tickets: </p> */}
            {/* <p className='cards-text'>Date: </p> */}
         </Card.Text>
