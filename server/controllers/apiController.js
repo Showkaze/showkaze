@@ -9,7 +9,6 @@ let currentPage = 1;
 
 const stateCodes = require('./stateCodes');
 
-
 apiController.getByState = (req, res, next) => {
   const { state } = req.params;
   if (state !== currentState) {
@@ -77,6 +76,7 @@ apiController.getPrevious = (req, res, next) => {
   return next();
 }
 
+
 /*
 This function takes the params.state property on the request and transforms it from an
 all lowercase name to a two-letter uppercase code for the state
@@ -105,6 +105,7 @@ function dateConverter (localTime) {
 let finalDate = dayOfWeek[dayFinder] + slicedDate;
 return finalDate;
 }
+
 
 
 module.exports = apiController;
