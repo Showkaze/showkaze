@@ -14,10 +14,10 @@ apiController.getByState = (req, res, next) => {
       const events = data.events;
       for (let i = 0; i < events.length; i++) { 
         const concert = {};
-        concert.imageURL = events[i].url;
+        concert.imageURL = events[i].performers[0].image;
         concert.artist = events[i].performers.map(el => el.name).join(', ');
         concert.city = events[i].venue.city;
-        concert.date = events[i].datetime_utc; // date format not decided yet
+        concert.date = dateConverter(events[i].datetime_local); // date format not decided yet
         // // var utcDate = events[i].datetime_utc; // date format not decided yet
         // var localDate = new Date(events[i].datetime_utc)
         res.locals.concertsByState.push(concert);
@@ -42,7 +42,23 @@ apiController.convertState = function(req, res, next){
   return next();
 }
 
-
+function dateConverter (localTime) {
+  let concertDate = new Date(localTime);
+  let stringDate = concertDate.toString();
+  let slicedDate = stringDate.slice(4, 21);
+  let dayFinder = concertDate.getDay().toString();
+  let dayOfWeek = {
+    0: 'Sunday, ',
+    1: 'Monday, ',
+    2: 'Tuesday, ',
+    3: 'Wednesday, ',
+    4: 'Thursday, ',
+    5: 'Friday, ',
+    6: 'Saturday, '
+  }
+let finalDate = dayOfWeek[dayFinder] + slicedDate;
+return finalDate;
+}
 
 
 module.exports = apiController;
