@@ -10,9 +10,9 @@ export default class NavigationBar extends Component {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className="me-auto">
-          <Nav.Link href="#Link1">Link 1</Nav.Link>
-          <Nav.Link href="#Link2">Link 2</Nav.Link>
-          <Nav.Link href="#Link3">Link 3</Nav.Link>			
+          <Nav.Link href="#Link1">Home</Nav.Link>
+          <Nav.Link href="#Link2">About</Nav.Link>
+          <Nav.Link href="#Link3">Blog</Nav.Link>			
         </Nav>
         <Form className="d-flex">
         <FormControl
@@ -22,7 +22,7 @@ export default class NavigationBar extends Component {
           aria-label="Search"
         />
         <Button variant="outline-primary">Search</Button>
-      </Form>
+        </Form>
         </Navbar.Collapse>
         </Container>
       </Navbar>

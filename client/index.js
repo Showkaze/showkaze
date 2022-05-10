@@ -5,10 +5,10 @@ import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-fetch('https://jsonplaceholder.typicode.com/photos')
+fetch('/location/california')
       .then((result) => result.json())
       .then((data) => {
-        console.log(data);
+        console.log("HERE IS THE DATA FROM FIRST PULL: ", data);
         renderRoot(data);
       });
 
